@@ -17,5 +17,26 @@ The system is designed to interact with **OpenHAB** via REST API, allowing synch
 - 🔄 **Synchronized Voice + Touch Control**  
   Both the UI and voice commands can control the same devices, keeping the system consistent.
 
-- 🔐 **Login ** 
-  Change the Login and the Password
+- 🔐 **Login !!** 
+  Change the Login and the Password for th OpenHAB
+
+  📦 Requirements
+  Pepper Robot (with Android 5.1 tablet and WebView ≤ 48)
+
+  OpenHAB with REST API enabled
+
+  SSH access to Pepper for file upload
+
+  Python 2.7 installed on your development machine
+
+  naoqi Python SDK installed (naoqi module required for ALTabletService)
+
+  🛠️ Launch PepperControl.py
+  Use your Python control script to open the WebView with the correct file path:
+
+  ALTabletService.showWebView("HTML PATH")
+
+
+  🙋 Contact
+  Created by KamikotoBaka
+  Smart Home Lab – Hochschule Furtwangen
