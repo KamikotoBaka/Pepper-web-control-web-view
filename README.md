@@ -37,6 +37,6 @@ The system is designed to interact with **OpenHAB** via REST API, allowing synch
   ALTabletService.showWebView("HTML PATH")
 
 
-  🙋 Contact
+  🙋
   Created by KamikotoBaka
   Smart Home Lab – Hochschule Furtwangen
