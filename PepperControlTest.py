@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import sys
+sys.path.append("/home/dan/Downloads/pynaoqi-python2.7-2.8.7.4-linux64-20210819_141148/lib/python2.7/site-packages/")
 import time
 import qi
 import threading
@@ -97,84 +99,76 @@ def send_multipple_commands(items, command):
 
 #Ligt Controll
 def all_lights_on():
-    lampen= [   "iKueche_Hue_Lampen_Schalter",
-                "iKueche_Osram_LEDStreifen_Schalter",
-                "iBad_Hue_Lampen_Schalter",
-                "iBad_Osram_LEDStreifen_Schalter",
-                "iBad_Hue_BloomLampen_Schalter",
-                "iIoT_Hue_Lampen_Schalter",
-                "iIoT_Hue_LEDStreifen_Schalter",
-                "iIoT_Hue_IrisLampen_Schalter",
-                "iMultimedia_Hue_Lampen_Schalter",
-                "iMultimedia_Hue_LEDStreifen_Schalter",
-                "iMultimedia_Hue_GOLampen_Schalter"]
-    send_multipple_commands (lampen, "ON")
+    lampen = [   
+    "iKueche_Hue_Lampen_Schalter","iKueche_Osram_LEDStreifen_Schalter","iBad_Hue_Lampen_Schalter",
+    "iBad_Osram_LEDStreifen_Schalter","iBad_Hue_BloomLampen_Schalter","iIoT_Hue_Lampen_Schalter",
+    "iIoT_Hue_LEDStreifen_Schalter","iIoT_Hue_IrisLampen_Schalter","iMultimedia_Hue_Lampen_Schalter",
+    "iMultimedia_Hue_LEDStreifen_Schalter","iMultimedia_Hue_GOLampen_Schalter"
+    ]
+    send_multipple_commands(lampen, "ON")
     
 def all_lights_off():
-    lampen= [   "iKueche_Hue_Lampen_Schalter",
-                "iKueche_Osram_LEDStreifen_Schalter",
-                "iBad_Hue_Lampen_Schalter",
-                "iBad_Osram_LEDStreifen_Schalter",
-                "iBad_Hue_BloomLampen_Schalter",
-                "iIoT_Hue_Lampen_Schalter",
-                "iIoT_Hue_LEDStreifen_Schalter",
-                "iIoT_Hue_IrisLampen_Schalter",
-                "iMultimedia_Hue_Lampen_Schalter",
-                "iMultimedia_Hue_LEDStreifen_Schalter",
-                "iMultimedia_Hue_GOLampen_Schalter"]
-    send_multipple_commands (lampen, "OFF")
+    lampen = [   
+    "iKueche_Hue_Lampen_Schalter","iKueche_Osram_LEDStreifen_Schalter","iBad_Hue_Lampen_Schalter",
+    "iBad_Osram_LEDStreifen_Schalter","iBad_Hue_BloomLampen_Schalter","iIoT_Hue_Lampen_Schalter",
+    "iIoT_Hue_LEDStreifen_Schalter","iIoT_Hue_IrisLampen_Schalter","iMultimedia_Hue_Lampen_Schalter",
+    "iMultimedia_Hue_LEDStreifen_Schalter","iMultimedia_Hue_GOLampen_Schalter"
+    ]
+    send_multipple_commands(lampen, "OFF")
 
 def iKueche_lights_on():
-    lampen =[   "iKueche_Hue_Lampen_Schalter",
-                "iKueche_Osram_LEDStreifen_Schalter"]
-    send_multipple_commands (lampen, "ON")
+    lampen = [
+    "iKueche_Hue_Lampen_Schalter","iKueche_Osram_LEDStreifen_Schalter"
+    ]
+    send_multipple_commands(lampen, "ON")
 
 def iKueche_lights_off():
-    lampen =[   "iKueche_Hue_Lampen_Schalter",
-                "iKueche_Osram_LEDStreifen_Schalter"]
-    send_multipple_commands (lampen, "OFF")
+    lampen = [   
+    "iKueche_Hue_Lampen_Schalter","iKueche_Osram_LEDStreifen_Schalter"
+    ]
+    send_multipple_commands(lampen, "OFF")
 
 def iBad_lights_on():
-    lampen =[   "iBad_Hue_Lampen_Schalter",
-                "iBad_Osram_LEDStreifen_Schalter",
-                "iBad_Hue_BloomLampen_Schalter"]
-    send_multipple_commands (lampen, "ON")
+    lampen = [   
+    "iBad_Hue_Lampen_Schalter","iBad_Osram_LEDStreifen_Schalter","iBad_Hue_BloomLampen_Schalter"
+    ]
+    send_multipple_commands(lampen, "ON")
 
 def iBad_lights_off():
-    lampen =[   "iBad_Hue_Lampen_Schalter",
-                "iBad_Osram_LEDStreifen_Schalter",
-                "iBad_Hue_BloomLampen_Schalter"]
-    send_multipple_commands (lampen, "OFF")
+    lampen = [   
+    "iBad_Hue_Lampen_Schalter","iBad_Osram_LEDStreifen_Schalter","iBad_Hue_BloomLampen_Schalter"
+    ]
+    send_multipple_commands(lampen, "OFF")
 
 def iIOT_lights_on():
-    lampen =[   "iIoT_Hue_Lampen_Schalter",
-                "iIoT_Hue_IrisLampen_Schalter",
-                "iIoT_Hue_LEDStreifen_Schalter"]
-    send_multipple_commands (lampen, "ON")
+    lampen = [   
+    "iIoT_Hue_Lampen_Schalter","iIoT_Hue_IrisLampen_Schalter","iIoT_Hue_LEDStreifen_Schalter"
+    ]
+    send_multipple_commands(lampen, "ON")
     
 def iIOT_lights_off():
-    lampen =[   "iIoT_Hue_Lampen_Schalter",
-                "iIoT_Hue_IrisLampen_Schalter",
-                "iIoT_Hue_LEDStreifen_Schalter"]
-    send_multipple_commands (lampen, "OFF")
+    lampen = [   
+    "iIoT_Hue_Lampen_Schalter","iIoT_Hue_IrisLampen_Schalter","iIoT_Hue_LEDStreifen_Schalter"
+    ]
+    send_multipple_commands(lampen, "OFF")
 
 def iMultimedia_lights_on():
-    lampen =[   "iMultimedia_Hue_Lampen_Schalter",
-                "iMultimedia_Hue_GOLampen_Schalter",
-                "iMultimedia_Hue_LEDStreifen_Schalter"]
-    send_multipple_commands (lampen, "ON")
+    lampen = [   
+    "iMultimedia_Hue_Lampen_Schalter","iMultimedia_Hue_GOLampen_Schalter","iMultimedia_Hue_LEDStreifen_Schalter"
+    ]
+    send_multipple_commands(lampen, "ON")
 
 def iMultimedia_lights_off():
-    lampen =[   "iMultimedia_Hue_Lampen_Schalter",
-                "iMultimedia_Hue_GOLampen_Schalter",
-                "iMultimedia_Hue_LEDStreifen_Schalter"]
-    send_multipple_commands (lampen, "OFF")
+    lampen = [   
+    "iMultimedia_Hue_Lampen_Schalter","iMultimedia_Hue_GOLampen_Schalter","iMultimedia_Hue_LEDStreifen_Schalter"
+    ]
+    send_multipple_commands(lampen, "OFF")
 #Jalousie Controll
 def iKonferenz_Rolladen_down(baseURL, auth, memory, tts=None):
     jalousItem = "iKonferenz_Somfy_Rollladen2_Steuerung"
-    windowsSensorKonferenz = [  "iKonferenz_Homematic_Fenster4_Position",
-                                "iKonferenz_Homematic_Fenster5_Position",
-                                "iKonferenz_Homematic_Fenster6_Position",]
+    windowsSensorKonferenz = [  
+    "iKonferenz_Homematic_Fenster4_Position","iKonferenz_Homematic_Fenster5_Position","iKonferenz_Homematic_Fenster6_Position",
+    ]
     # Check all sensors
     for sensor in windowsSensorKonferenz:
         state = getState(baseURL, sensor, auth)
@@ -193,9 +187,9 @@ def iKonferenz_Rolladen_down(baseURL, auth, memory, tts=None):
     
 def iMultimedia_Rolladen_down(baseURL, auth, memory, tts=None):
     jalousItem = "iMultimedia_Somfy_Rollladen_Steuerung"
-    windowsSensorMultimedia = [ "iMultimedia_Homematic_Fenster1_Position",
-                                "iMultimedia_Homematic_Fenster2_Position",
-                                "iMultimedia_Homematic_Fenster3_Position",]
+    windowsSensorMultimedia = [ 
+    "iMultimedia_Homematic_Fenster1_Position","iMultimedia_Homematic_Fenster2_Position","iMultimedia_Homematic_Fenster3_Position",
+    ]
     # Check all sensors
     for sensor in windowsSensorMultimedia:
         state = getState(baseURL, sensor, auth)
@@ -213,18 +207,14 @@ def iMultimedia_Rolladen_down(baseURL, auth, memory, tts=None):
     return True
 
 def all_Rolladen_down(baseURL, auth, memory, tts=None):
-    jalousItems = [ "iKonferenz_Somfy_Rollladen2_Steuerung",
-                    "iKonferenz_Somfy_Rollladen1_Steuerung",
-                    "iMultimedia_Somfy_Rollladen_Steuerung"]
-    windowsSensorsAll = [   "iKonferenz_Homematic_Fenster1_Position",
-                            "iKonferenz_Homematic_Fenster2_Position",
-                            "iKonferenz_Homematic_Fenster3_Position",
-                            "iKonferenz_Homematic_Fenster4_Position",
-                            "iKonferenz_Homematic_Fenster5_Position",
-                            "iKonferenz_Homematic_Fenster6_Position",
-                            "iMultimedia_Homematic_Fenster1_Position",
-                            "iMultimedia_Homematic_Fenster2_Position",
-                            "iMultimedia_Homematic_Fenster3_Position",]
+    jalousItems = [ 
+    "iKonferenz_Somfy_Rollladen2_Steuerung","iKonferenz_Somfy_Rollladen1_Steuerung","iMultimedia_Somfy_Rollladen_Steuerung"
+    ]
+    windowsSensorsAll = [   
+    "iKonferenz_Homematic_Fenster1_Position","iKonferenz_Homematic_Fenster2_Position","iKonferenz_Homematic_Fenster3_Position",
+    "iKonferenz_Homematic_Fenster4_Position","iKonferenz_Homematic_Fenster5_Position","iKonferenz_Homematic_Fenster6_Position",
+    "iMultimedia_Homematic_Fenster1_Position","iMultimedia_Homematic_Fenster2_Position","iMultimedia_Homematic_Fenster3_Position",
+    ]
     
     # Check all sensors
     for sensor in windowsSensorsAll:
@@ -244,9 +234,9 @@ def all_Rolladen_down(baseURL, auth, memory, tts=None):
     return True
 
 def all_Rolladen_up(baseURL, auth, memory, tts=None):
-    jalousItems = [ "iKonferenz_Somfy_Rollladen2_Steuerung",
-                    "iKonferenz_Somfy_Rollladen1_Steuerung",
-                    "iMultimedia_Somfy_Rollladen_Steuerung"]
+    jalousItems = [ 
+    "iKonferenz_Somfy_Rollladen2_Steuerung","iKonferenz_Somfy_Rollladen1_Steuerung","iMultimedia_Somfy_Rollladen_Steuerung"
+    ]
     for jalousItem in jalousItems:
         send_openhab_command(jalousItem, "UP")
     if tts:
@@ -254,9 +244,9 @@ def all_Rolladen_up(baseURL, auth, memory, tts=None):
     return True
 
 def all_Rolladen_stop(baseURL, auth, memory, tts=None):
-    jalousItems = [ "iKonferenz_Somfy_Rollladen2_Steuerung",
-                    "iKonferenz_Somfy_Rollladen1_Steuerung",
-                    "iMultimedia_Somfy_Rollladen_Steuerung"]
+    jalousItems = [ 
+    "iKonferenz_Somfy_Rollladen2_Steuerung","iKonferenz_Somfy_Rollladen1_Steuerung","iMultimedia_Somfy_Rollladen_Steuerung"
+    ]
     for jalousItem in jalousItems:
         send_openhab_command(jalousItem, "STOP")
     if tts:
@@ -265,27 +255,26 @@ def all_Rolladen_stop(baseURL, auth, memory, tts=None):
     
 #Labor Light Color
 def iLabor_light_color(color, baseURL, auth):
-    laborLightColor = [ "iMultimedia_Hue_Lampen_Farbe",
-                        "iKueche_Hue_Lampen_Farbe",
-                        "iBad_Hue_Lampen_Farbe",
-                        "iIoT_Hue_Lampen_Farbe"]
+    laborLightColor = [ 
+    "iMultimedia_Hue_Lampen_Farbe","iKueche_Hue_Lampen_Farbe","iBad_Hue_Lampen_Farbe",
+    "iIoT_Hue_Lampen_Farbe"
+    ]
     for item in laborLightColor:
         send_openhab_command(item, color)
 #Labor Light Brightness
 def iLabor_light_brightness(value,baseURL, auth):
-    laborLightBrightness = [    "iKueche_Hue_Lampen_Helligkeit",
-                                "iBad_Hue_Lampen_Helligkeit",
-                                "iIoT_Hue_Lampen_Helligkeit",
-                                "iMultimedia_Hue_Lampen_Helligkeit"]
+    laborLightBrightness = [    
+    "iKueche_Hue_Lampen_Helligkeit","iBad_Hue_Lampen_Helligkeit","iIoT_Hue_Lampen_Helligkeit",
+    "iMultimedia_Hue_Lampen_Helligkeit"
+    ]
     for item in laborLightBrightness:
         send_openhab_command(item, value)
     
 def linkinpark(value):
-    linkinparkItems =["iKueche_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark", 
-                      "iBad_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark", 
-                    "iIoT_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark", 
-                    "iMultimedia_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark", 
-                    "iKonferenz_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark"]
+    linkinparkItems =[
+    "iKueche_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark", "iBad_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark", "iIoT_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark", 
+    "iMultimedia_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark", "iKonferenz_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark"
+    ]
     for item in linkinparkItems:
         send_openhab_command(item, value)
     
@@ -586,6 +575,19 @@ def handle_command(phrase, tts, baseURL, auth, memory):
         return
     else:
         tts.say("")
+
+# Webanzeige auf Tablet # Ich hab dich nicht verstanden. Bitte wiederhol noch man
+"""def show_tablet_webview(tablet_session):
+    tablet_service = tablet_session.service("ALTabletService")
+    try:
+        url = "http://192.168.0.246:80/homecontrol.html"
+        tablet_service.showWebview(url)
+        print("Tablet-Webview gestartet.")
+        # Aktiv lassen, bis man beendet
+        
+
+    except Exception as e:
+        print("Tablet Fehler:", e)"""
     
 
 # Speech recognition
@@ -625,7 +627,7 @@ def start_speech_recognition(speech_session, stop_event):
     asr.subscribe("PepperSpeechControl")
     print("Spracherkennung gestartet. Drücke CTRL + C zum Beenden.")
     baseURL = "192.168.0.5:8080"
-    auth = requests.auth.HTTPBasicAuth("login", "password")
+    auth = requests.auth.HTTPBasicAuth("openHABAdmin", "hJem2jz6")
 
     try:
         while not stop_event.is_set():
@@ -677,7 +679,7 @@ def main(session, stop_event):
     tabletService = session.service("ALTabletService")
 
     baseURL = "192.168.0.5:8080"
-    auth = requests.auth.HTTPBasicAuth("login", "password")
+    auth = requests.auth.HTTPBasicAuth("openHABAdmin", "hJem2jz6")
 
     # Hier Items
     items = {
@@ -693,7 +695,7 @@ def main(session, stop_event):
         memory.insertData("{}_status".format(itemName), initialState)
         print("[Initial] {} and {}".format(itemName, initialState))
 
-    # HTML-UI anzeigen #Change the Path
+    # HTML-UI anzeigen
     htmlFilePath = "http://198.18.0.1/apps/openhab_ui/openhab_ui_pepper/index.html"
     print("[Debug] Loading URL on tablet:", htmlFilePath)
     tabletService.showWebview(htmlFilePath)
