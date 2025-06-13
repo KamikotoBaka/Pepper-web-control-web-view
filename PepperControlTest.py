@@ -713,7 +713,7 @@ def start_speech_recognition(speech_session, stop_event):
     asr.subscribe("PepperSpeechControl")
     print("Spracherkennung gestartet. Drücke CTRL + C zum Beenden.")
     baseURL = "192.168.0.5:8080"
-    auth = requests.auth.HTTPBasicAuth("openHABAdmin", "hJem2jz6")
+    auth = requests.auth.HTTPBasicAuth("login", "password")
 
     try:
         while not stop_event.is_set():
@@ -771,7 +771,7 @@ def main(session, stop_event):
     tabletService = session.service("ALTabletService")
 
     baseURL = "192.168.0.5:8080"
-    auth = requests.auth.HTTPBasicAuth("openHABAdmin", "hJem2jz6")
+    auth = requests.auth.HTTPBasicAuth("login", "password")
 
     # Hier Items
     items = {
