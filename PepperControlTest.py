@@ -16,7 +16,7 @@ It includes live status updates using Server-Sent Events (SSE).
 import sys
 # Add path to naoqi Python SDK
 
-sys.path.append("/home/dan/Downloads/pynaoqi-python2.7-2.8.7.4-linux64-20210819_141148/lib/python2.7/site-packages/")
+sys.path.append("Naoqi PATH")
 
 
 sys.path.append("Naoqi Path")
