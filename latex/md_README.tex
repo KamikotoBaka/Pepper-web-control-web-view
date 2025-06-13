@@ -1,0 +1,39 @@
+\chapter{Smart Home Web Control for Pepper Robot }
+\hypertarget{md_README}{}\label{md_README}\index{Smart Home Web Control for Pepper Robot@{Smart Home Web Control for Pepper Robot}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+
+
+This project enables full control of a smart home lab environment using both {\bfseries{voice recognition}} and a {\bfseries{web-\/based interface}} displayed on the {\bfseries{Pepper robot\textquotesingle{}s tablet}}.
+
+The system is designed to interact with {\bfseries{Open\+HAB}} via REST API, allowing synchronized actions via\+:
+\begin{DoxyItemize}
+\item Voice commands through Pepper\textquotesingle{}s speech recognition system
+\item A responsive UI running in a Web\+View on Pepper’s tablet
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md1}{}\doxysection{\texorpdfstring{🔧 Features}{🔧 Features}}\label{md_README_autotoc_md1}
+
+\begin{DoxyItemize}
+\item 🔊 {\bfseries{Voice-\/\+Controlled Automation}} ~\newline
+ Use Pepper\textquotesingle{}s voice recognition to trigger smart home actions such as turning on lights, lowering blinds, starting a meeting, etc.
+\item 📱 {\bfseries{Tablet UI Integration}} ~\newline
+ A fully integrated web UI is shown on Pepper’s tablet using Web\+View, offering manual control and feedback in real time.
+\item 🔄 {\bfseries{Synchronized Voice + Touch Control}} ~\newline
+ Both the UI and voice commands can control the same devices, keeping the system consistent.
+\item 🔐 {\bfseries{Login !!}} Change the Login and the Password for th Open\+HAB
+
+📦 Requirements Pepper Robot (with Android 5.\+1 tablet and Web\+View ≤ 48)
+
+Open\+HAB with REST API enabled
+
+SSH access to Pepper for file upload
+
+Python 2.\+7 installed on your development machine
+
+naoqi Python SDK installed (naoqi module required for ALTablet\+Service)
+
+🛠️ Launch Pepper\+Control.\+py Use your Python control script to open the Web\+View with the correct file path\+:
+
+ALTablet\+Service.\+show\+Web\+View("{}\+HTML PATH"{})
+
+🙋 Created by Kamikoto\+Baka Smart Home Lab – Hochschule Furtwangen 
+\end{DoxyItemize}

@@ -1,5 +1,20 @@
 # -*- coding: utf-8 -*-
+
+"""
+@file PepperControlTest.py
+@brief Control script for the Pepper robot using OpenHAB (Smart Home platform).
+
+This script enables speech command recognition and controls smart devices
+such as lights, blinds, audio, and appliances via OpenHAB's REST API.
+It includes live status updates using Server-Sent Events (SSE).
+
+@author KamikotoBaka
+@date 2025-06-13
+"""
+
+
 import sys
+# Add path to naoqi Python SDK
 sys.path.append("/home/dan/Downloads/pynaoqi-python2.7-2.8.7.4-linux64-20210819_141148/lib/python2.7/site-packages/")
 import time
 import qi
@@ -9,12 +24,23 @@ import urllib2
 import json
 import signal
 from naoqi import ALProxy
-#Wartezeit einbauen
-last_command_time = 0
-last_phrase = ""
-COMMAND_DELAY = 3  # Sekunden warten zwischen zwei Befehlen
-PHRASE_RESET_DELAY = 5 
+
+
+# === Global Variables ===
+last_command_time = 0  #: Timestamp of the last executed command
+last_phrase = ""       #: Last recognized phrase
+COMMAND_DELAY = 3      #: Seconds to wait between commands
+PHRASE_RESET_DELAY = 5 #: Delay before allowing repeat of same phrase
+
+
 def getState(baseURL, itemName, auth):
+    """
+    @brief Retrieves the current state of an OpenHAB item.
+    @param baseURL Base URL of the OpenHAB server
+    @param itemName Name of the OpenHAB item
+    @param auth Tuple of username and password for authentication
+    @return The state of the item or "UNDEFINED" in case of an error
+    """
     url = "http://{}/rest/items/{}".format(baseURL, itemName)
     headers = {"Accept": "application/json"}
 
@@ -27,7 +53,15 @@ def getState(baseURL, itemName, auth):
         print("[Error] Initial state for {} could not be retrieved:".format(itemName), e)
         return "UNDEFINED"
 
+
 def sendCommand(baseURL, itemName, command, auth):
+    """
+    @brief Sends a command to an OpenHAB item via REST API.
+    @param baseURL Base URL of the OpenHAB server
+    @param itemName Name of the OpenHAB item
+    @param command Command string (e.g., "ON", "OFF")
+    @param auth Tuple for HTTP Basic authentication
+    """
     url = "http://{}/rest/items/{}".format(baseURL, itemName)
     headers = {"Content-Type": "text/plain"}
 
@@ -41,7 +75,15 @@ def sendCommand(baseURL, itemName, command, auth):
     except Exception as e:
         print("[Connection error] for sendCommand {}:".format(itemName), e)
 
+
 def postUpdate(baseURL, itemName, state, auth):
+    """
+    @brief Updates the state of an OpenHAB item.
+    @param baseURL OpenHAB server URL
+    @param itemName Item to be updated
+    @param state New state as string
+    @param auth HTTP authentication tuple
+    """
     url = "http://{}/rest/items/{}/state".format(baseURL, itemName)
     headers = {"Content-Type": "text/plain"}
 
@@ -55,7 +97,16 @@ def postUpdate(baseURL, itemName, state, auth):
     except Exception as e:
         print("[Connection error] for postUpdate {}:".format(itemName), e)
 
+
+
 def ItemStateEvent(baseURL, itemName, memory, auth):
+    """
+    @brief Starts an SSE (Server-Sent Events) listener for an OpenHAB item.
+    @param baseURL OpenHAB server URL
+    @param itemName Item to monitor
+    @param memory ALMemory service to store and raise events
+    @param auth Authentication credentials
+    """
     url = "http://{}/rest/events?topics=openhab/items/{}/state".format(baseURL, itemName)
     headers = {"Accept": "text/event-stream"}
 
@@ -77,8 +128,15 @@ def ItemStateEvent(baseURL, itemName, memory, auth):
     except Exception as e:
         print("[Error] Connection to event stream for {} failed:".format(itemName), e)
 
-# OpenHAB Command
+
+
 def send_openhab_command(item, command):
+    """
+    @brief Sends a raw OpenHAB command using urllib2.
+    @param item Item name in OpenHAB
+    @param command Command to send (e.g., "ON")
+    @return True if the command succeeded (HTTP 202), False otherwise
+    """
     url = "http://192.168.0.5:8080/rest/items/" + item
     req = urllib2.Request(url, data=command)
     req.add_header("Content-Type", "text/plain")
@@ -88,14 +146,22 @@ def send_openhab_command(item, command):
     except Exception as e:
         print("Fehler beim Senden:", e)
         return False
-#Multipple Commands
+
+
 def send_multipple_commands(items, command):
+    """
+    @brief Sends the same command to multiple OpenHAB items.
+    @param items List of item names
+    @param command Command to apply
+    @return True if all commands succeed, False otherwise
+    """
     success = True
     for item in items:
         if not send_openhab_command(item, command):
             print("Fehler beim Item:", item)
             success = False
     return success
+
 
 #Ligt Controll
 def all_lights_on():
@@ -107,6 +173,7 @@ def all_lights_on():
     ]
     send_multipple_commands(lampen, "ON")
     
+    
 def all_lights_off():
     lampen = [   
     "iKueche_Hue_Lampen_Schalter","iKueche_Osram_LEDStreifen_Schalter","iBad_Hue_Lampen_Schalter",
@@ -116,11 +183,13 @@ def all_lights_off():
     ]
     send_multipple_commands(lampen, "OFF")
 
+
 def iKueche_lights_on():
     lampen = [
     "iKueche_Hue_Lampen_Schalter","iKueche_Osram_LEDStreifen_Schalter"
     ]
     send_multipple_commands(lampen, "ON")
+
 
 def iKueche_lights_off():
     lampen = [   
@@ -128,11 +197,13 @@ def iKueche_lights_off():
     ]
     send_multipple_commands(lampen, "OFF")
 
+
 def iBad_lights_on():
     lampen = [   
     "iBad_Hue_Lampen_Schalter","iBad_Osram_LEDStreifen_Schalter","iBad_Hue_BloomLampen_Schalter"
     ]
     send_multipple_commands(lampen, "ON")
+
 
 def iBad_lights_off():
     lampen = [   
@@ -140,11 +211,13 @@ def iBad_lights_off():
     ]
     send_multipple_commands(lampen, "OFF")
 
+
 def iIOT_lights_on():
     lampen = [   
     "iIoT_Hue_Lampen_Schalter","iIoT_Hue_IrisLampen_Schalter","iIoT_Hue_LEDStreifen_Schalter"
     ]
     send_multipple_commands(lampen, "ON")
+    
     
 def iIOT_lights_off():
     lampen = [   
@@ -152,17 +225,21 @@ def iIOT_lights_off():
     ]
     send_multipple_commands(lampen, "OFF")
 
+
 def iMultimedia_lights_on():
     lampen = [   
     "iMultimedia_Hue_Lampen_Schalter","iMultimedia_Hue_GOLampen_Schalter","iMultimedia_Hue_LEDStreifen_Schalter"
     ]
     send_multipple_commands(lampen, "ON")
 
+
 def iMultimedia_lights_off():
     lampen = [   
     "iMultimedia_Hue_Lampen_Schalter","iMultimedia_Hue_GOLampen_Schalter","iMultimedia_Hue_LEDStreifen_Schalter"
     ]
     send_multipple_commands(lampen, "OFF")
+    
+    
 #Jalousie Controll
 def iKonferenz_Rolladen_down(baseURL, auth, memory, tts=None):
     jalousItem = "iKonferenz_Somfy_Rollladen2_Steuerung"
@@ -185,6 +262,7 @@ def iKonferenz_Rolladen_down(baseURL, auth, memory, tts=None):
         tts.say("Ich fahre den Rollladen herunter.")
     return True
     
+    
 def iMultimedia_Rolladen_down(baseURL, auth, memory, tts=None):
     jalousItem = "iMultimedia_Somfy_Rollladen_Steuerung"
     windowsSensorMultimedia = [ 
@@ -205,6 +283,7 @@ def iMultimedia_Rolladen_down(baseURL, auth, memory, tts=None):
     if tts:
         tts.say("Ich fahre den Rollladen herunter.")
     return True
+
 
 def all_Rolladen_down(baseURL, auth, memory, tts=None):
     jalousItems = [ 
@@ -233,6 +312,7 @@ def all_Rolladen_down(baseURL, auth, memory, tts=None):
         tts.say("Ich fahre alle Jalousien herunter.")
     return True
 
+
 def all_Rolladen_up(baseURL, auth, memory, tts=None):
     jalousItems = [ 
     "iKonferenz_Somfy_Rollladen2_Steuerung","iKonferenz_Somfy_Rollladen1_Steuerung","iMultimedia_Somfy_Rollladen_Steuerung"
@@ -243,6 +323,7 @@ def all_Rolladen_up(baseURL, auth, memory, tts=None):
         tts.say("Ich fahre alle Jalousien hoch.")
     return True
 
+
 def all_Rolladen_stop(baseURL, auth, memory, tts=None):
     jalousItems = [ 
     "iKonferenz_Somfy_Rollladen2_Steuerung","iKonferenz_Somfy_Rollladen1_Steuerung","iMultimedia_Somfy_Rollladen_Steuerung"
@@ -252,6 +333,7 @@ def all_Rolladen_stop(baseURL, auth, memory, tts=None):
     if tts:
         tts.say("Ich habe alle Jalousien gestoppt.")
     return True
+ 
     
 #Labor Light Color
 def iLabor_light_color(color, baseURL, auth):
@@ -261,6 +343,8 @@ def iLabor_light_color(color, baseURL, auth):
     ]
     for item in laborLightColor:
         send_openhab_command(item, color)
+   
+
 #Labor Light Brightness
 def iLabor_light_brightness(value,baseURL, auth):
     laborLightBrightness = [    
@@ -270,6 +354,7 @@ def iLabor_light_brightness(value,baseURL, auth):
     for item in laborLightBrightness:
         send_openhab_command(item, value)
     
+    
 def linkinpark(value):
     linkinparkItems =[
     "iKueche_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark", "iBad_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark", "iIoT_Audio_Medialib_Morgenroutine_WhatIveDoneLinkinPark", 
@@ -278,8 +363,17 @@ def linkinpark(value):
     for item in linkinparkItems:
         send_openhab_command(item, value)
     
+    
 # Speech Commands
 def handle_command(phrase, tts, baseURL, auth, memory):
+    """
+    @brief Main handler for incoming speech commands.
+    @param phrase Recognized speech phrase
+    @param tts ALTextToSpeech object
+    @param baseURL OpenHAB address
+    @param auth Authentication credentials
+    @param memory ALMemory instance
+    """
     
     global last_command_time, last_phrase
     now = time.time()
@@ -575,23 +669,15 @@ def handle_command(phrase, tts, baseURL, auth, memory):
         return
     else:
         tts.say("")
-
-# Webanzeige auf Tablet # Ich hab dich nicht verstanden. Bitte wiederhol noch man
-"""def show_tablet_webview(tablet_session):
-    tablet_service = tablet_session.service("ALTabletService")
-    try:
-        url = "http://192.168.0.246:80/homecontrol.html"
-        tablet_service.showWebview(url)
-        print("Tablet-Webview gestartet.")
-        # Aktiv lassen, bis man beendet
-        
-
-    except Exception as e:
-        print("Tablet Fehler:", e)"""
     
 
 # Speech recognition
 def start_speech_recognition(speech_session, stop_event):
+    """
+    @brief Starts speech recognition loop and triggers command handling.
+    @param speech_session qi.Session object
+    @param stop_event Thread event to stop recognition
+    """
     ip = "192.168.0.41"
     port = 9559
     tts = speech_session.service("ALTextToSpeech")
@@ -674,7 +760,13 @@ def start_speech_recognition(speech_session, stop_event):
         except Exception:
             pass
 
+
 def main(session, stop_event):
+    """
+    @brief Initializes tablet UI and SSE event listeners for items.
+    @param session qi.Session object for Pepper
+    @param stop_event Thread event to stop program
+    """
     memory = session.service("ALMemory")
     tabletService = session.service("ALTabletService")
 
@@ -696,7 +788,7 @@ def main(session, stop_event):
         print("[Initial] {} and {}".format(itemName, initialState))
 
     # HTML-UI anzeigen
-    htmlFilePath = "http://198.18.0.1/apps/openhab_ui/openhab_ui_pepper/index.html"
+    htmlFilePath = "http://198.18.0.1/apps/openhab_ui/openhab_ui2/openhab_ui_pepper/index.html"
     print("[Debug] Loading URL on tablet:", htmlFilePath)
     tabletService.showWebview(htmlFilePath)
 
@@ -711,12 +803,12 @@ def main(session, stop_event):
     except KeyboardInterrupt:
         tabletService.hideWebview()
         print("\n[Closed] Display closed.")
-    # Thread für Tablet
-    #tablet_thread = threading.Thread(target=show_tablet_webview, args=(session,))
-    #tablet_thread.start()
 
-    # Sprachsteuerung starten
+
 if __name__ == "__main__":
+    """
+    @brief Entry point: connects to Pepper, starts threads for speech and UI.
+    """
     session = qi.Session()
     session.connect("tcp://192.168.0.41:9559")
     stop_event = threading.Event()
